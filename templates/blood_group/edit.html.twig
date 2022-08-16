@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit BloodGroup{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container-fluid">
+        <div class="card mx-auto" style="max-width: 40rem;">
+            <div class="card-header" style="text-align: center;background-color: white; font-weight: bold; font-size: 18px">
+                <span>Edit Blood Group</span>
+            </div>
+            {{ form_errors(form) }}
+
+            {{ form_start(form) }}
+            <div class="card-body">
+                {{ form_label(form.name, 'Name') }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-select mb-3'}}) }}
+
+                {{ form_label(form.description, 'Description') }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-select mb-3'}}) }}
+             </div>
+         </div>
+    </div>
+
+    </div>
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-6" style="text-align: start">
+                <a class="btn btn-secondary" href="{{ path('app_blood_group_index') }}" type="button">Back</a>
+            </div>
+            <div class="col-6" style="text-align: end">
+                {{ include('blood_group/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+    </div>
+    <br>
+
+{#    <h1>Edit BloodGroup</h1>#}
+
+{#    {{ include('blood_group/_form.html.twig', {'button_label': 'Update'}) }}#}
+
+{#    <a href="{{ path('app_blood_group_index') }}">back to list</a>#}
+
+{#    {{ include('blood_group/_delete_form.html.twig') }}#}
+{% endblock %}

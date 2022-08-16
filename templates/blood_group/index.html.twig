@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BloodGroup index{% endblock %}
+
+{% block body %}
+
+    <style>
+        .social-link {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover,
+        .social-link:focus {
+            background: #ddd;
+            text-decoration: none;
+            color: #555;
+        }
+    </style>
+
+    <div class="bg-light">
+        <div class="container py-5">
+            <div class="row h-100 align-items-center py-5">
+                <div class="col-lg-6">
+                    <h1 class="display-4"style="color:#B0413E">Importance of blood donation</h1>
+                    <p class="lead text-muted mb-0">About 328 million people currently live in the U.S. Each year, approximately 6.8 million people in the U.S donate blood. Annually, this adds up to about 13.6 million units of whole blood collected for donation in the U.S. The Red Cross provides about 40% of our nation’s blood and blood cell components to donors. Your blood donations are used for patients in need of surgery, cancer treatment and transfusions for blood loss from traumatic injuries.</p>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block"><img src={{ asset('images/benefits of blood donation.jpg') }} alt="" class="img-fluid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white py-5">
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <h2 class="font-weight-light" style="color:#B0413E">Did you know?</h2>
+                    <p class="font-italic text-muted mb-4">One donation can save multiple lives. Here are the facts:</p>
+                    <ul>
+                        <li>Just <b>1 donation</b> can save up to <b>3 lives</b></li>
+                        <li>The average red blood cell transfusion is <b>3 pints</b> (or 3 whole-blood donations).</li>
+                        <li>More than <b>1 million</b> people every year are diagnosed with cancer for the first time. Many of them will need blood—sometimes daily—during chemotherapy.</li>
+                        <li>More than <b>38,000 blood donations</b> are needed every day.</li>
+                        <li><b>Type O-negative</b> whole blood can be transfused to people with any blood type, but this type of blood is rare, and supplies of it are low.</li>
+                        <li><b>Type AB plasma</b> can be transfused to patients with all other blood types, but it's also in <b>short supply</b>.</li>
+                        <li>While <b>38%</b> of the American population is eligible to give blood, only <b>2% actually donates</b>.</li>
+                    </ul>
+                </div>
+{#                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src={{ asset('images/did you know.jpg') }} alt="" class="img-fluid mb-4 mb-lg-0"></div>#}
+            </div>
+{#            <div class="row align-items-center">#}
+{#                <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>#}
+{#                <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>#}
+{#                    <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>#}
+{#                    <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+
+
+    {#            blood groups#}
+
+    <div class="bg-light py-5">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-lg-5">
+                    <h2 class="display-4 font-weight-light" style="color:#B0413E">Blood groups</h2>
+                    <a href="{{ path('app_blood_group_new') }}" class="social-link fa fa-plus"></a>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                {% for blood_group  in blood_groups %}
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4">
+                        <h5 class="mb-0" style="color:#B0413E">{{ blood_group.name }}</h5>
+                        <span class="small text-uppercase text-muted">{{ blood_group.description }}</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="{{ path('app_blood_group_edit', {'id': blood_group.id}) }}" class="social-link"><i class="fa fa-edit"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-trash"></i></a></li>
+                            <li>{{ include('blood_group/_delete_form.html.twig') }}</li>
+                        </ul>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{#    <h1>BloodGroup index</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Name</th>#}
+{#                <th>Description</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for blood_group in blood_groups %}#}
+{#            <tr>#}
+{#                <td>{{ blood_group.id }}</td>#}
+{#                <td>{{ blood_group.name }}</td>#}
+{#                <td>{{ blood_group.description }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_blood_group_show', {'id': blood_group.id}) }}">show</a>#}
+{#                    <a href="{{ path('app_blood_group_edit', {'id': blood_group.id}) }}">edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="4">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_blood_group_new') }}">Create new</a>#}
+{% endblock %}
