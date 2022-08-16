@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="banner"></div>
+    <div class="container-fluid">
+        <div class="card mx-auto" style="max-width: 80rem;">
+            <div class="card-header mb-3" style="text-align: center;background-color: white; font-weight: bold;
+            font-size:18px;">
+                <span>Users</span>
+            </div>
+            <div class="card-body">
+
+                <!--Flash messages-->
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('fail') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <!--End flash-->
+
+                <!--Users List Table -->
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr class="asdf">
+                                <th scope="row">{{ user.getId() }}</th>
+                                <td>{{ user.getFirstName() }}</td>
+                                <td>{{ user.getLastName() }}</td>
+                                <td>{{ user.getEmail() }}</td>
+                                {% for role in user.getRoles() %}
+                                <td>{{ role }}</td>
+                                {% endfor %}
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#upgrade-{{ user.getId() }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                            data-bs-target="#add-{{ user.getId() }}">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete-{{ user.getId() }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!--Add to black list modal-->
+                            <div class="modal fade" id="add-{{ user.getId() }}"
+                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Add to Black List</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+
+                                        <form method="post" action="#">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Email</label>
+                                                    <input name="email" type="email" class="form-control" id="exampleInputPassword1" value="{{ user.getEmail() }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Cause</label>
+                                                    <textarea name="cause" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End modal-->
+
+                            <!--Delete confirmation modal-->
+                            <div class="modal fade" id="delete-{{ user.getId() }}"
+                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Delete user</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h6>Are you sure you want to delete the user with the id <span
+                                                        style="font-weight: bold">{{ user.getId() }} ?</span>
+                                            </h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+{#                                            <a type="button" class="btn btn-danger"#}
+{#                                               href="{{ path('app_user_delete', {'id': user.getId()}) }}">Confirm</a>#}
+                                            {{ include('user/_delete_form.html.twig') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End modal-->
+
+                            <!--Edit role modal-->
+                            <div class="modal fade" id="upgrade-{{ user.getId() }}"
+                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Change Role</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <!--role change form-->
+                                        <form method="post" action="#">
+                                            <div class="modal-body">
+                                                <input type="hidden" id="idUser" name="idUser" value="{{ user.getId() }}">
+
+                                                <div class="form-group mb-2">
+                                                    <label for="reservationStatus">Change User Role</label>
+{#                                                    <select name="userRole" class="form-select" id="userRole">#}
+{#                                                        {% for role in roles %}#}
+{#                                                            {% if role == user.getIdRole() %}#}
+{#                                                                <option value="{{ role.getIdRole() }}" selected>{{ role.getName() }}</option>#}
+{#                                                            {% else %}#}
+{#                                                                <option value="{{ role.getIdRole() }}">{{ role.getName() }}</option>#}
+{#                                                            {% endif %}#}
+{#                                                        {% endfor %}#}
+{#                                                    </select>#}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-success">Change</button>
+                                            </div>
+                                        </form>
+                                        <!--End form-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End edit-->
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Table-->
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+
+{#    <h1>User index</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Email</th>#}
+{#                <th>Roles</th>#}
+{#                <th>Password</th>#}
+{#                <th>FirstName</th>#}
+{#                <th>LastName</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for user in users %}#}
+{#            <tr>#}
+{#                <td>{{ user.id }}</td>#}
+{#                <td>{{ user.email }}</td>#}
+{#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+{#                <td>{{ user.password }}</td>#}
+{#                <td>{{ user.firstName }}</td>#}
+{#                <td>{{ user.lastName }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>#}
+{#                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="7">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_user_new') }}">Create new</a>#}
+{% endblock %}
