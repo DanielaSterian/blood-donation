@@ -1,6 +1,7 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    /*background: url("../images/user-icon.png")no-repeat center center fixed;*/
 }
 
 a {
@@ -75,7 +76,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: #c8253e;
     border: none;
     color: white;
     padding: 15px 80px;
