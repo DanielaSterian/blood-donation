@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BloodGroup;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -50,12 +51,19 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_user_show", methods={"GET"})
+     * @Route("/profile", name="app_user_show", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function show(): Response
     {
+        $user = $this->getUser();
+        $userData = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $user->getUsername()]);
+
+        $bloodGroup = $this->getDoctrine()->getRepository(BloodGroup::class)->findOneBy([
+            'id'=> $userData->getBloodGroup()
+        ]);
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'bloodGroup' => $bloodGroup,
         ]);
     }
 

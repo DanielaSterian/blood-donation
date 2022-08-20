@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -53,6 +55,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=BloodGroup::class, inversedBy="users")
+     */
+    private $bloodGroup;
 
     public function getId(): ?int
     {
@@ -173,5 +180,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    public function getBloodGroup(): ?BloodGroup
+    {
+        return $this->bloodGroup;
+    }
+
+    public function setBloodGroup(?BloodGroup $bloodGroup): self
+    {
+        $this->bloodGroup = $bloodGroup;
+
+        return $this;
     }
 }

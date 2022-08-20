@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\BloodGroup;
 use App\Entity\User;
+use App\Form\BloodGroupType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +19,9 @@ class UserType extends AbstractType
                 ->add('email')
                 ->add('firstName')
                 ->add('lastName')
+                ->add('bloodGroup', BloodGroupType::class, [
+                    'label' => false
+                ])
             ;
         }
         if($options['forAdmin'] == true) {

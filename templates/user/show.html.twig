@@ -30,6 +30,10 @@
                                                 <h6 class="text-muted f-w-400">{{ user.email }}</h6>
                                             </div>
                                             <div class="row-sm-6">
+                                                <p class="m-b-10 f-w-600"><b>Blood Group</b></p>
+                                                <h6 class="text-muted f-w-400">{{ bloodGroup.name }}</h6>
+                                            </div>
+                                            <div class="row-sm-6">
                                                 <a class="btn btn-danger btn-sm" name="update-user" href="{{ path('app_user_edit', {'id': user.id}) }}">
                                                     <i class="fa fa-edit" aria-hidden="true"></i> Edit profile
                                                 </a>
