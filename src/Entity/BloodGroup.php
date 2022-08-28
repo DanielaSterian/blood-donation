@@ -34,9 +34,15 @@ class BloodGroup
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Requester::class, mappedBy="bloodGroupId")
+     */
+    private $requester;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->requester = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +98,36 @@ class BloodGroup
             // set the owning side to null (unless already changed)
             if ($user->getBloodGroup() === $this) {
                 $user->setBloodGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requester>
+     */
+    public function getRequester(): Collection
+    {
+        return $this->requester;
+    }
+
+    public function addRequester(Requester $requester): self
+    {
+        if (!$this->requester->contains($requester)) {
+            $this->requester[] = $requester;
+            $requester->setBloodGroupId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequester(Requester $requester): self
+    {
+        if ($this->requester->removeElement($requester)) {
+            // set the owning side to null (unless already changed)
+            if ($requester->getBloodGroupId() === $this) {
+                $requester->setBloodGroupId(null);
             }
         }
 

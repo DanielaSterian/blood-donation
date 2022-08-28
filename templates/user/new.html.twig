@@ -36,6 +36,12 @@
                                             </label>
                                             {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
                                         </div>
+                                        <div class="row-sm-6">
+                                            <label>
+                                                <b> Blood group </b>
+                                            </label>
+                                            {{ form_widget(form.bloodGroup, {'attr':{'class':'form-select'}}) }}
+                                        </div>
                                         {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
                                         <br>
                                         {{ form_end(form) }}

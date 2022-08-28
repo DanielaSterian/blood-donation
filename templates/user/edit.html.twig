@@ -40,7 +40,7 @@
                                             <label>
                                                 <b> BloodGroup </b>
                                             </label>
-                                            {{ form_widget(form.bloodGroup.name, {'attr':{'class':'form-control'}}) }}
+                                            {{ form_widget(form.bloodGroup, {'attr':{'class':'form-control form-select'}}) }}
                                         </div>
                                             {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
                                         <br>

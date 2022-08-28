@@ -41,7 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -57,9 +56,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     /**
-     * @ORM\ManyToOne(targetEntity=BloodGroup::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=BloodGroup::class, inversedBy="users", cascade={"persist"})
      */
     private $bloodGroup;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Requester::class, mappedBy="userId", cascade={"persist"})
+     */
+    private $requesters;
+
+    public function __construct()
+    {
+        $this->requesters = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +199,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBloodGroup(?BloodGroup $bloodGroup): self
     {
         $this->bloodGroup = $bloodGroup;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requester>
+     */
+    public function getRequesters(): Collection
+    {
+        return $this->requesters;
+    }
+
+    public function addRequester(Requester $requester): self
+    {
+        if (!$this->requesters->contains($requester)) {
+            $this->requesters[] = $requester;
+            $requester->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequester(Requester $requester): self
+    {
+        if ($this->requesters->removeElement($requester)) {
+            // set the owning side to null (unless already changed)
+            if ($requester->getUserId() === $this) {
+                $requester->setUserId(null);
+            }
+        }
 
         return $this;
     }

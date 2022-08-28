@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New BloodGroup{% endblock %}
+{% block title %}New Requester{% endblock %}
 
 {% block body %}
+    <h1>Create new Requester</h1>
 
     <div class="banner"></div>
     <br>
@@ -10,17 +11,23 @@
     <div class="container-fluid">
         <div class="card mx-auto" style="max-width: 40rem;">
             <div class="card-header" style="text-align: center;background-color: white; font-weight: bold; font-size: 18px">
-                <span>Create new Blood Group</span>
+                <span>Create new Request</span>
             </div>
             {{ form_errors(form) }}
 
             {{ form_start(form) }}
             <div class="card-body">
-                {{ form_label(form.name, 'Name') }}
-                {{ form_widget(form.name, {'attr': {'class': 'form-control mb-3'}}) }}
+                {{ form_label(form.firstName, 'First Name') }}
+                {{ form_widget(form.firstName, {'attr': {'class': 'form-control mb-3'}}) }}
+
+                {{ form_label(form.lastName, 'Last Name') }}
+                {{ form_widget(form.lastName, {'attr': {'class': 'form-control mb-3'}}) }}
 
                 {{ form_label(form.description, 'Description') }}
                 {{ form_widget(form.description, {'attr': {'class': 'form-control mb-3'}}) }}
+
+                {{ form_label(form.bloodGroup, 'Blood Group') }}
+                {{ form_widget(form.bloodGroup, {'attr': {'class': 'form-control form-select mb-3'}}) }}
             </div>
         </div>
     </div>
@@ -30,7 +37,7 @@
     <div class="card-footer">
         <div class="row">
             <div class="col-6" style="text-align: start">
-                <a class="btn btn-secondary" href="{{ path('app_blood_group_index') }}" type="button">Back</a>
+                <a class="btn btn-secondary" href="{{ path('app_requester_index') }}" type="button">Back</a>
             </div>
             <div class="col-6" style="text-align: end">
                 {{ include('blood_group/_form.html.twig', {'button_label': 'Save'}) }}
@@ -42,9 +49,11 @@
     </div>
     <br>
 
-{#    <h1>Create new BloodGroup</h1>#}
 
-{#    {{ include('blood_group/_form.html.twig') }}#}
 
-{#    <a href="{{ path('app_blood_group_index') }}">back to list</a>#}
+
+
+{#    {{ include('requester/_form.html.twig') }}#}
+
+    <a href="{{ path('app_requester_index') }}">back to list</a>
 {% endblock %}
