@@ -7,6 +7,7 @@ use App\Repository\BloodGroupRepository;
 use App\Repository\RequesterRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\BloodGroup;
@@ -22,6 +23,9 @@ class RequesterType extends AbstractType
             ->add('description')
             ->add('firstName')
             ->add('lastName')
+            ->add('image', FileType::class,[
+                'label' => 'Image (PNG/JPG/JPEG)',
+                'data_class' => null,])
 //            ->add('bloodGroup', BloodGroupType::class, [
 //                'label' => false
 //            ])

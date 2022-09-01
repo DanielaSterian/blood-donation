@@ -3,39 +3,167 @@
 {% block title %}Requester index{% endblock %}
 
 {% block body %}
-    <h1>Requester index</h1>
+    <div class="container-fluid">
+        <div class="row">
+            {% for requester in requesters %}
+                <!--Card Code-->
+                <div class="col-md-4 col-lg-4 col-sm-6 mt-3 d-flex align-items-stretch">
+                    <div class="card" style="width: 18rem;">
+{#                        {% if(user.image != null) %}#}
+{#                            <img src="{{ asset('uploads/' ~ user.image) }}" class="w-25">#}
+{#                        {% else %}#}
+{#                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">#}
+{#                        {% endif%}#}
+                        <img class="card-img-top" src={{asset("/images/user-icon.png") }}
+                             alt="Card-image">
+                        <div class="card-body">
+                            <p>
+                                <a class="card-title"
+                                   href="#"
+                                   style="color: rgb(64,96,107);font-weight: bold;font-size: x-large">
+                                            <span class="carModel">
+                                                <span style="text-indent: 5em">{{ requester.firstName }}</span>
+                                                <span>{{ requester.lastName  }}</span>
+                                            </span>
+                                </a>
+                            </p>
+                            <br>
+                            <div class="card-text">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span> {{ requester.bloodGroup.name }}</span>
+                                        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Blood Group</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for requester in requesters %}
-            <tr>
-                <td>{{ requester.id }}</td>
-                <td>{{ requester.description }}</td>
-                <td>{{ requester.firstName }}</td>
-                <td>{{ requester.lastName }}</td>
-                <td>{{ requester.getBloodGroup().name }}</td>
-                <td>
-                    <a href="{{ path('app_requester_show', {'id': requester.id}) }}">show</a>
-                    <a href="{{ path('app_requester_edit', {'id': requester.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                                    </div>
+                                    <br>
+                                </div>
 
-    <a href="{{ path('app_requester_new') }}">Create new</a>
+                                <section class="pricing py-5">
+                                    <h6 class="card-price text-center" style="font-size: x-large">
+                                        {{ requester.description }}</h6>
+                                </section>
+                            </div>
+                        </div>
+
+
+{#                        <!--Rating-->#}
+{#                        <div id="car-container">#}
+{#                            <!--car rating-->#}
+{#                            <div class="id-{{ carSpecs.getIdCar().getIdCar() }}"#}
+{#                                 style="font-size: 16pt; text-align: center;">#}
+{#                                <div class="stars-outer">#}
+{#                                    <div class="stars-inner"></div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            `#}
+{#                        </div>#}
+
+
+                        <div class="card-footer">
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <a href="{{ path('app_requester_show', {'id': requester.id}) }}"
+                                       type="button" class="btn btn-dark btn-block">
+                                        Details
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#"
+                                       type="button" class="btn btn-warning btn-block">
+                                        Donate
+                                    </a>
+                                </div>
+                            </div>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a class="btn btn-primary" href="{{ path('app_requester_edit', {'id': requester.id}) }}">
+                                            Edit
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        {{ include('requester/_delete_form.html.twig') }}
+{#                                        <button class="btn btn-danger" data-bs-toggle="modal"#}
+{#                                                data-bs-target="#delete-">#}
+{#                                            <i class="fa fa-trash" aria-hidden="true"></i>#}
+{#                                        </button>#}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!--Delete confirmation modal-->
+{#                <div class="modal fade" id="delete-{{ carSpecs.getIdTechSpecifications() }}"#}
+{#                     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"#}
+{#                     aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
+{#                    <div class="modal-dialog">#}
+{#                        <div class="modal-content">#}
+{#                            <div class="modal-header">#}
+{#                                <h5 class="modal-title" id="staticBackdropLabel">Remove Car</h5>#}
+{#                                <button type="button" class="btn-close" data-bs-dismiss="modal"#}
+{#                                        aria-label="Close"></button>#}
+{#                            </div>#}
+{#                            <div class="modal-body">#}
+{#                                <h6>Are you sure you want to remove <span style="font-weight: bold">{{ carSpecs#}
+{#                                            .getIdCar()#}
+{#                                            .getIdBrand()#}
+{#                                        .name }} {{ carSpecs.getIdCar().getIdModel().name }}</span>?</h6>#}
+{#                            </div>#}
+{#                            <div class="modal-footer">#}
+{#                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close#}
+{#                                </button>#}
+{#                                <a type="button" class="btn btn-danger"#}
+{#                                   href="{{ path('admin.Delete', {id: carSpecs#}
+{#                                   .idTechSpecifications}) }}">Confirm</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <!--End modal-->
+            {% endfor %}
+        </div>
+        <!--Some space between body and footer-->
+        <br><br>
+    </div>
+    <!--End list of vehicle-->
+
+{#    <h1>Requester index</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Description</th>#}
+{#                <th>First Name</th>#}
+{#                <th>Last Name</th>#}
+{#                <th>Blood Group</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for requester in requesters %}#}
+{#            <tr>#}
+{#                <td>{{ requester.id }}</td>#}
+{#                <td>{{ requester.description }}</td>#}
+{#                <td>{{ requester.firstName }}</td>#}
+{#                <td>{{ requester.lastName }}</td>#}
+{#                <td>{{ requester.getBloodGroup().name }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_requester_show', {'id': requester.id}) }}">show</a>#}
+{#                    <a href="{{ path('app_requester_edit', {'id': requester.id}) }}">edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="5">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_requester_new') }}">Create new</a>#}
 {% endblock %}

@@ -8,6 +8,8 @@ use App\Entity\User;
 use App\Form\RequesterType;
 use App\Repository\RequesterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +44,32 @@ class RequesterController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            if(!empty($image))
+//            {
+//                $filesystem = new Filesystem();
+//                if($requester->getImage())
+//                {
+//                    $filesystem->remove($this->getParameter('images_directory') . '/' . $requester->getImage());
+//                }
+//
+//                $imageName = md5(uniqid()).'.'.$image->guessExtension();
+//                try
+//                {
+//                    $image->move(
+//                        $this->getParameter('images_directory'),
+//                        $imageName
+//                    );
+//                }
+//                catch (FileException $e)
+//                {
+//                    $this->addFlash('danger', 'Could not upload the image.');
+//                    $this->redirectToRoute('register');
+//                }
+//
+//                $requester->setImage($imageName);
+//            }
+            $image = $form->get('image')->getData();
+            $requester->setImage($image);
             $requester->setUser($this->getUser());
             $requesterRepository->add($requester, true);
 
