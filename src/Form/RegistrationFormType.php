@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Form\Type\AddressType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -25,6 +26,10 @@ class RegistrationFormType extends AbstractType
             ->add('First_Name', TextType::class)
             ->add('Last_Name', TextType::class)
             ->add('Email', EmailType::class)
+            ->add('bloodGroup', EntityType::class, [
+                'class' => 'App\Entity\BloodGroup',
+                'choice_label'=>'name'
+            ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),

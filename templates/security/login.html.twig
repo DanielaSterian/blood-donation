@@ -26,16 +26,16 @@
 
             <!-- Login Form -->
             <form method="post">
-                <input type="email" id="inputEmail" class="fadeIn second" name="email" placeholder="login" value="{{ last_username }}">
-                <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="password">
+                <input type="email" id="inputEmail" class="fadeIn second" name="email" placeholder="email" value="{{ last_username }}">
+                <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="parola">
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="submit" class="fadeIn fourth" value="Logare">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+                <a class="underlineHover" href="#">Ai uitat parola?</a>
             </div>
 
         </div>

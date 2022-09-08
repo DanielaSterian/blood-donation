@@ -37,18 +37,18 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ path('app_blood_group_index') }}">Home</a>
+                            <a class="nav-link" aria-current="page" href="{{ path('app_blood_group_index') }}">Acasa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_requester_index') }}">Blood request</a>
+                            <a class="nav-link" href="{{ path('app_requester_index') }}">Cazuri</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_donation_index') }}">History</a>
+                            <a class="nav-link" href="{{ path('app_donation_index') }}">Istoric</a>
                         </li>
 
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_user_index") }}">Users</a>
+                                <a class="nav-link" href="{{ path("app_user_index") }}">Utilizatori</a>
                             </li>
                         {% endif %}
 
@@ -59,7 +59,7 @@
                         {% if app.user %}
                         <li class="nav-item">
                             <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">
-                                <b>Signed in as:</b>
+                                <b>Logat ca:</b>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -71,11 +71,11 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser">
-                                        <a class="dropdown-item" href="{{ path('app_user_show')}}">Profile</a>
-                                        <a class="dropdown-item" href="{{ path('app_user_edit', {'id': app.user.id}) }}">Settings</a>
+                                        <a class="dropdown-item" href="{{ path('app_user_show')}}">Profil</a>
+                                        <a class="dropdown-item" href="{{ path('app_user_edit', {'id': app.user.id}) }}">Setari</a>
                                         <div class="dropdown-divider bg-white"></div>
                                         <a class="dropdown-item" href="{{ path('app_logout') }}"><i
-                                                    class="bi bi-box-arrow-in-left"></i>Logout</a>
+                                                    class="bi bi-box-arrow-in-left"></i>Delogare</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,11 +83,11 @@
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link  text-light" href="{{ path('app_login') }}" tabindex="-1"
-                               aria-disabled="true"> Login</a>
+                               aria-disabled="true">Logare</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  text-light" href="{{ path('register') }}" tabindex="-1"
-                               aria-disabled="true">Register </a>
+                               aria-disabled="true">Inregistrare</a>
                         <li class="nav-item">
 
                             {% endif %}

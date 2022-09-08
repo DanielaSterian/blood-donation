@@ -3,7 +3,7 @@
 {% block title %}Donation{% endblock %}
 
 {% block body %}
-    <h1>Donation</h1>
+    <h1>Donatie</h1>
 
     <table class="table">
         <tbody>
@@ -12,15 +12,15 @@
                 <td>{{ donation.id }}</td>
             </tr>
             <tr>
-                <th>Message</th>
+                <th>Mesaj</th>
                 <td>{{ donation.message }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_donation_index') }}">back to list</a>
+    <a href="{{ path('app_donation_index') }}">Inapoi la lista</a>
 
-    <a href="{{ path('app_donation_edit', {'id': donation.id}) }}">edit</a>
+    <a href="{{ path('app_donation_edit', {'id': donation.id}) }}">Editeaza</a>
 
     {{ include('donation/_delete_form.html.twig') }}
 {% endblock %}

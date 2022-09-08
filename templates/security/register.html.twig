@@ -13,8 +13,8 @@
 
     <div class="signup-form">
         {{ form_start(form) }}
-        <h2>Register</h2>
-        <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        <h2>Inregistrare</h2>
+        <p class="hint-text">Creaza-ti un cont. Este gratis si dureaza doar un minut.</p>
         {{ form_errors(form) }}
         <!--Flash messages-->
         {% for message in app.flashes('success') %}
@@ -32,10 +32,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col">
-                    {{ form_widget(form.First_Name, {'attr': {'class': 'form-control', 'placeholder':'First Name', 'type':'text'}}) }}
+                    {{ form_widget(form.First_Name, {'attr': {'class': 'form-control', 'placeholder':'Nume', 'type':'text'}}) }}
                 </div>
                 <div class="col">
-                    {{ form_widget(form.Last_Name, {'attr': {'class': 'form-control', 'placeholder':'Last Name', 'type':'text'}}) }}
+                    {{ form_widget(form.Last_Name, {'attr': {'class': 'form-control', 'placeholder':'Prenume', 'type':'text'}}) }}
                 </div>
             </div>
         </div>
@@ -43,19 +43,24 @@
             {{ form_widget(form.Email, {'attr': {'class': 'form-control', 'placeholder':'Email', 'type':'email'}}) }}
         </div>
 
+
+        {{ form_widget(form.bloodGroup, {'attr': {'class': 'form-control form-select mb-3'}}) }}
+
         <div class="form-group">
-            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder':'Password', 'type':'password'}}) }}
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder':'Parola', 'type':'password'}}) }}
         </div>
         <div class="form-group">
-            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder':'Confirm Password', 'type':'password'}}) }}
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder':'Confirma parola', 'type':'password'}}) }}
         </div>
         <div class="form-group">
-            <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+            <label class="form-check-label"><input type="checkbox" required="required"> Accept <a href="#">termenii de utilizare</a> &amp; <a href="#">politica privata</a></label>
         </div>
         <div class="form-group">
-            {{ form_widget(form.Save, { 'label': 'Register Now', 'class':'btn btn-danger'}) }}
+            {{ form_widget(form.Save, { 'label': 'Inregisteaza-te acum', 'class':'btn btn-danger'}) }}
+{#            {{ form_widget(form.Save, { 'attr': {'class':'btn btn-danger', 'label':'Register Now'}}) }}#}
         </div>
         {{ form_end(form) }}
-        <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+{#        <div class="text-center">Already have an account? <a href="#">Sign in</a></div>#}
     </div>
 {% endblock %}
+{#{'button_label': 'Salveaza'}#}

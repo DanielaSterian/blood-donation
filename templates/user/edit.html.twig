@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Editeaza profilul{% endblock %}
 
 {% block body %}
     <br>
@@ -15,18 +15,18 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="card-block">
-                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Edit Informations</h6>
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Editeaza informatiile</h6>
                                     <div class="col">
 
                                         <div class="row-sm-6">
                                             <label>
-                                                <b> First name </b>
+                                                <b> Nume </b>
                                             </label>
                                             {{ form_widget(form.firstName, {'attr':{'class':'form-control'}}) }}
                                         </div>
                                         <div class="row-sm-6">
                                             <label>
-                                                <b> Last name </b>
+                                                <b> Prenume </b>
                                             </label>
                                             {{ form_widget(form.lastName, {'attr':{'class':'form-control'}}) }}
                                         </div>
@@ -38,11 +38,11 @@
                                         </div>
                                         <div class="row-sm-6">
                                             <label>
-                                                <b> BloodGroup </b>
+                                                <b> Grupa de sange </b>
                                             </label>
                                             {{ form_widget(form.bloodGroup, {'attr':{'class':'form-control form-select'}}) }}
                                         </div>
-                                            {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+                                            {{ include('user/_form.html.twig', {'button_label': 'Salveaza'}) }}
                                         <br>
                                         {{ form_end(form) }}
                                     </div>

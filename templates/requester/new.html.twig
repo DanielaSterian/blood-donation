@@ -10,25 +10,25 @@
     <div class="container-fluid">
         <div class="card mx-auto" style="max-width: 40rem;">
             <div class="card-header" style="text-align: center;background-color: white; font-weight: bold; font-size: 18px">
-                <span>Create new Request</span>
+                <span>Creaza o noua cerere de sange</span>
             </div>
             {{ form_errors(form) }}
 
             {{ form_start(form) }}
             <div class="card-body">
-                {{ form_label(form.firstName, 'First Name') }}
+                {{ form_label(form.firstName, 'Nume') }}
                 {{ form_widget(form.firstName, {'attr': {'class': 'form-control mb-3'}}) }}
 
-                {{ form_label(form.lastName, 'Last Name') }}
+                {{ form_label(form.lastName, 'Prenume') }}
                 {{ form_widget(form.lastName, {'attr': {'class': 'form-control mb-3'}}) }}
 
-                {{ form_label(form.description, 'Description') }}
+                {{ form_label(form.description, 'Descriere') }}
                 {{ form_widget(form.description, {'attr': {'class': 'form-control mb-3'}}) }}
 
-                {{ form_label(form.bloodGroup, 'Blood Group') }}
+                {{ form_label(form.bloodGroup, 'Grupa de sange') }}
                 {{ form_widget(form.bloodGroup, {'attr': {'class': 'form-control form-select mb-3'}}) }}
 
-                {{ form_label(form.image, 'Image') }}
+                {{ form_label(form.image, 'Imagine') }}
                 {{ form_widget(form.image, {'attr': {'class': 'form-control mb-3'}}) }}
             </div>
         </div>
@@ -39,10 +39,10 @@
     <div class="card-footer">
         <div class="row">
             <div class="col-6" style="text-align: start">
-                <a class="btn btn-secondary" href="{{ path('app_requester_index') }}" type="button">Back</a>
+                <a class="btn btn-secondary" href="{{ path('app_requester_index') }}" type="button">Inapoi</a>
             </div>
             <div class="col-6" style="text-align: end">
-                {{ include('blood_group/_form.html.twig', {'button_label': 'Save'}) }}
+                {{ include('blood_group/_form.html.twig', {'button_label': 'Salveaza'}) }}
             </div>
         </div>
     </div>

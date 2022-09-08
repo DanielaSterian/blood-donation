@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Requester{% endblock %}
+{% block title %}Caz{% endblock %}
 
 {% block body %}
 
@@ -16,14 +16,14 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="card-block">
-                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informations</h6>
+                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informatii</h6>
                                         <div class="col">
                                             <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>First Name</b></p>
+                                                <p class="m-b-10 f-w-600"><b>Nume</b></p>
                                                 <h6 class="text-muted f-w-400">{{ requester.firstName }}</h6>
                                             </div>
                                             <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Last Name</b></p>
+                                                <p class="m-b-10 f-w-600"><b>Prenume</b></p>
                                                 <h6 class="text-muted f-w-400">{{ requester.lastName }}</h6>
                                             </div>
                                             <div class="row-sm-6">
@@ -31,12 +31,12 @@
                                                 <h6 class="text-muted f-w-400">{{ requester.description }}</h6>
                                             </div>
                                             <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Blood Group</b></p>
+                                                <p class="m-b-10 f-w-600"><b>Grupa de sange</b></p>
                                                 <h6 class="text-muted f-w-400">{{ bloodGroup.name }}</h6>
                                             </div>
                                             <div class="row-sm-6">
                                                 <a class="btn btn-danger btn-sm" name="update-user" href="{{ path('app_requester_edit', {'id': requester.id}) }}">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i> Edit requester
+                                                    <i class="fa fa-edit" aria-hidden="true"></i> Editeaza cazul
                                                 </a>
                                             </div>
                                         </div>

@@ -9,13 +9,13 @@
                 <!--Card Code-->
                 <div class="col-md-4 col-lg-4 col-sm-6 mt-3 d-flex align-items-stretch">
                     <div class="card" style="width: 18rem;">
-{#                        {% if(user.image != null) %}#}
-{#                            <img src="{{ asset('uploads/' ~ user.image) }}" class="w-25">#}
-{#                        {% else %}#}
+
+                            <img class="card-img-top" src="{{ asset('uploads/' ~ requester.image) }}">
+
 {#                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">#}
 {#                        {% endif%}#}
-                        <img class="card-img-top" src={{asset("/images/user-icon.png") }}
-                             alt="Card-image">
+{#                        <img class="card-img-top" src={{asset("/images/user-icon.png") }}#}
+{#                             alt="Card-image">#}
                         <div class="card-body">
                             <p>
                                 <a class="card-title"
@@ -51,7 +51,7 @@
                                 <div class="col-6">
                                     <a href="{{ path('app_requester_show', {'id': requester.id}) }}"
                                        type="button" class="btn btn-dark btn-block">
-                                        Details
+                                        Detalii
                                     </a>
                                 </div>
                                 <div class="col-6">
@@ -62,7 +62,7 @@
 
                                     <a href="{{ path('app_donation_new', {'id': requester.id}) }}"
                                        type="button" class="btn btn-warning btn-block">
-                                        Donate
+                                        Doneaza
                                     </a>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <a class="btn btn-primary" href="{{ path('app_requester_edit', {'id': requester.id}) }}">
-                                            Edit
+                                            Editeaza
                                         </a>
                                     </div>
                                     <div class="col-6">

@@ -44,6 +44,7 @@ class RequesterController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
             if(!empty($image))
             {
                 $filesystem = new Filesystem();
@@ -68,8 +69,6 @@ class RequesterController extends AbstractController
 
                 $requester->setImage($imageName);
             }
-//            $image = $form->get('image')->getData();
-//            $requester->setImage($image);
             $requester->setUser($this->getUser());
             $requesterRepository->add($requester, true);
 

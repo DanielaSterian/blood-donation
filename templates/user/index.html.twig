@@ -8,7 +8,7 @@
         <div class="card mx-auto" style="max-width: 80rem;">
             <div class="card-header mb-3" style="text-align: center;background-color: white; font-weight: bold;
             font-size:18px;">
-                <span>Users</span>
+                <span>Utilizatori</span>
             </div>
             <div class="card-body">
 
@@ -32,11 +32,11 @@
                         <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
+                            <th scope="col">Nume</th>
+                            <th scope="col">Prenume</th>
                             <th scope="col">E-mail</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Actiune</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -108,18 +108,18 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Delete user</h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Sterge utilizator</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <h6>Are you sure you want to delete the user with the id <span
+                                            <h6>Esti sigur ca vrei sa stergi utilizatorul cu id-ul <span
                                                         style="font-weight: bold">{{ user.getId() }} ?</span>
                                             </h6>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Close
+                                                Inchide
                                             </button>
 {#                                            <a type="button" class="btn btn-danger"#}
 {#                                               href="{{ path('app_user_delete', {'id': user.getId()}) }}">Confirm</a>#}
@@ -139,7 +139,7 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Change Role</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                    aria-label="Inchide"></button>
                                         </div>
                                         <!--role change form-->
                                         <form method="post" action="#">
