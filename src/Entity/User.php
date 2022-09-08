@@ -65,9 +65,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $requesters;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Donation::class, mappedBy="user")
+     */
+    private $donations;
+
     public function __construct()
     {
         $this->requesters = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,6 +233,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($requester->getUserId() === $this) {
                 $requester->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Donation>
+     */
+    public function getDonations(): Collection
+    {
+        return $this->donations;
+    }
+
+    public function addDonation(Donation $donation): self
+    {
+        if (!$this->donations->contains($donation)) {
+            $this->donations[] = $donation;
+            $donation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDonation(Donation $donation): self
+    {
+        if ($this->donations->removeElement($donation)) {
+            // set the owning side to null (unless already changed)
+            if ($donation->getUser() === $this) {
+                $donation->setUser(null);
             }
         }
 

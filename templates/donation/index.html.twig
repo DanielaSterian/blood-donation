@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donation index{% endblock %}
+
+{% block body %}
+
+    <div class="banner"></div>
+    <div class="container-fluid">
+        <div class="card mx-auto" style="max-width: 80rem;">
+            <div class="card-header mb-3" style="text-align: center;background-color: white; font-weight: bold;
+            font-size:18px;">
+                <span>Donations</span>
+            </div>
+            <div class="card-body">
+
+                <!--Flash messages-->
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('fail') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <!--End flash-->
+
+                <!--Users List Table -->
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Requester Name</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for donation in donations %}
+                            <tr class="asdf">
+                                <th scope="row">{{ donation.getId() }}</th>
+                                <td>{{ donation.message }}</td>
+                                <td>{{ donation.user.firstName }} {{ donation.user.lastName }}</td>
+                                <td>{{ donation.requester.firstName }} {{ donation.requester.lastName }}</td>
+                                <td>
+{#                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"#}
+{#                                            data-bs-target="{{ path('app_donation_edit', {'id': donation.id}) }}">#}
+{#                                        <i class="fa fa-edit" aria-hidden="true"></i>#}
+{#                                    </button>#}
+{#                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"#}
+{#                                            data-bs-target="#add-{{ donation.getId() }}">#}
+{#                                        <i class="fa fa-plus"></i>#}
+{#                                    </button>#}
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete-{{ donation.getId() }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!--Delete confirmation modal-->
+                            <div class="modal fade" id="delete-{{ donation.getId() }}"
+                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Delete user</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h6>Are you sure you want to delete the donation with the id <span
+                                                        style="font-weight: bold">{{ donation.getId() }} ?</span>
+                                            </h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            {{ include('donation/_delete_form.html.twig') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End modal-->
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Table-->
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+{#    <a href="{{ path('app_donation_new', {'id': requester.id}) }}">Create new</a>#}
+{% endblock %}

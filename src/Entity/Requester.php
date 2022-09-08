@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RequesterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Requester
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Donation::class, mappedBy="requester")
+     */
+    private $donations;
+
+    public function __construct()
+    {
+        $this->donations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,36 @@ class Requester
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Donation>
+     */
+    public function getDonations(): Collection
+    {
+        return $this->donations;
+    }
+
+    public function addDonation(Donation $donation): self
+    {
+        if (!$this->donations->contains($donation)) {
+            $this->donations[] = $donation;
+            $donation->setRequester($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDonation(Donation $donation): self
+    {
+        if ($this->donations->removeElement($donation)) {
+            // set the owning side to null (unless already changed)
+            if ($donation->getRequester() === $this) {
+                $donation->setRequester(null);
+            }
+        }
 
         return $this;
     }

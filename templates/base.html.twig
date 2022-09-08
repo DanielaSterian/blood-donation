@@ -43,25 +43,15 @@
                             <a class="nav-link" href="{{ path('app_requester_index') }}">Blood request</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Became a donor</a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_user_index') }}">Users</a>
+                            <a class="nav-link" href="{{ path('app_donation_index') }}">History</a>
                         </li>
-                        </li>
+
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">History</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Black List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Users</a>
+                                <a class="nav-link" href="{{ path("app_user_index") }}">Users</a>
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
+
                     </ul>
 
                     <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
@@ -81,7 +71,6 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser">
-                                        <a class="dropdown-item" href="#">item1</a>
                                         <a class="dropdown-item" href="{{ path('app_user_show')}}">Profile</a>
                                         <a class="dropdown-item" href="{{ path('app_user_edit', {'id': app.user.id}) }}">Settings</a>
                                         <div class="dropdown-divider bg-white"></div>
@@ -105,8 +94,8 @@
 
                             {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a type="button" class="btn btn-outline-light" href="#">
-                                <i class="fas fa-plus-circle"></i>
+                            <a type="button" class="btn btn-outline-light" href="{{ path('app_requester_new') }}">
+                                <i class="fa fa-plus"></i>
                             </a>
                         </li>
                         {% endif %}

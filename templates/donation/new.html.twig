@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Requester{% endblock %}
+{% block title %}New Donation{% endblock %}
 
 {% block body %}
 
@@ -10,26 +10,14 @@
     <div class="container-fluid">
         <div class="card mx-auto" style="max-width: 40rem;">
             <div class="card-header" style="text-align: center;background-color: white; font-weight: bold; font-size: 18px">
-                <span>Create new Request</span>
+                <span>Send a message to the requester</span>
             </div>
             {{ form_errors(form) }}
 
             {{ form_start(form) }}
             <div class="card-body">
-                {{ form_label(form.firstName, 'First Name') }}
-                {{ form_widget(form.firstName, {'attr': {'class': 'form-control mb-3'}}) }}
-
-                {{ form_label(form.lastName, 'Last Name') }}
-                {{ form_widget(form.lastName, {'attr': {'class': 'form-control mb-3'}}) }}
-
-                {{ form_label(form.description, 'Description') }}
-                {{ form_widget(form.description, {'attr': {'class': 'form-control mb-3'}}) }}
-
-                {{ form_label(form.bloodGroup, 'Blood Group') }}
-                {{ form_widget(form.bloodGroup, {'attr': {'class': 'form-control form-select mb-3'}}) }}
-
-                {{ form_label(form.image, 'Image') }}
-                {{ form_widget(form.image, {'attr': {'class': 'form-control mb-3'}}) }}
+                {{ form_label(form.message, 'Message') }}
+                {{ form_widget(form.message, {'attr': {'class': 'form-control mb-3'}}) }}
             </div>
         </div>
     </div>
@@ -51,6 +39,8 @@
     </div>
     <br>
 
-{#    {{ include('requester/_form.html.twig') }}#}
 
+{#    {{ include('donation/_form.html.twig') }}#}
+
+{#    <a href="{{ path('app_donation_index') }}">back to list</a>#}
 {% endblock %}

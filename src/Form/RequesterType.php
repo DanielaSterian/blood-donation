@@ -26,17 +26,6 @@ class RequesterType extends AbstractType
             ->add('image', FileType::class,[
                 'label' => 'Image (PNG/JPG/JPEG)',
                 'data_class' => null,])
-//            ->add('bloodGroup', BloodGroupType::class, [
-//                'label' => false
-//            ])
-//            ->add('bloodGroup', EntityType::class,[
-//                'class' => BloodGroup::class,
-//                'query_builder'=> function (RequesterRepository $repo)
-//                {
-//                    return $repo->findBloodGroupName();
-//                },
-//                'choice_label' => 'name'
-//            ])
 
             ->add('bloodGroup', EntityType::class, [
                 'class' => 'App\Entity\BloodGroup',

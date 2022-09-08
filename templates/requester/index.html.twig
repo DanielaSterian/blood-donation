@@ -46,20 +46,6 @@
                             </div>
                         </div>
 
-
-{#                        <!--Rating-->#}
-{#                        <div id="car-container">#}
-{#                            <!--car rating-->#}
-{#                            <div class="id-{{ carSpecs.getIdCar().getIdCar() }}"#}
-{#                                 style="font-size: 16pt; text-align: center;">#}
-{#                                <div class="stars-outer">#}
-{#                                    <div class="stars-inner"></div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            `#}
-{#                        </div>#}
-
-
                         <div class="card-footer">
                             <div class="row mb-2">
                                 <div class="col-6">
@@ -69,7 +55,12 @@
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#"
+{#                                    <a href="{{ path('app_donation_new') }}"#}
+{#                                       type="button" class="btn btn-warning btn-block">#}
+{#                                        Donate#}
+{#                                    </a>#}
+
+                                    <a href="{{ path('app_donation_new', {'id': requester.id}) }}"
                                        type="button" class="btn btn-warning btn-block">
                                         Donate
                                     </a>
@@ -130,40 +121,6 @@
         <br><br>
     </div>
     <!--End list of vehicle-->
-
-{#    <h1>Requester index</h1>#}
-
-{#    <table class="table">#}
-{#        <thead>#}
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <th>Description</th>#}
-{#                <th>First Name</th>#}
-{#                <th>Last Name</th>#}
-{#                <th>Blood Group</th>#}
-{#                <th>actions</th>#}
-{#            </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for requester in requesters %}#}
-{#            <tr>#}
-{#                <td>{{ requester.id }}</td>#}
-{#                <td>{{ requester.description }}</td>#}
-{#                <td>{{ requester.firstName }}</td>#}
-{#                <td>{{ requester.lastName }}</td>#}
-{#                <td>{{ requester.getBloodGroup().name }}</td>#}
-{#                <td>#}
-{#                    <a href="{{ path('app_requester_show', {'id': requester.id}) }}">show</a>#}
-{#                    <a href="{{ path('app_requester_edit', {'id': requester.id}) }}">edit</a>#}
-{#                </td>#}
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td colspan="5">no records found</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
 
 {#    <a href="{{ path('app_requester_new') }}">Create new</a>#}
 {% endblock %}
