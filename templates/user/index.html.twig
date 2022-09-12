@@ -54,52 +54,12 @@
                                             data-bs-target="#upgrade-{{ user.getId() }}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </button>
-                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                            data-bs-target="#add-{{ user.getId() }}">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#delete-{{ user.getId() }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                 </td>
                             </tr>
-
-                            <!--Add to black list modal-->
-                            <div class="modal fade" id="add-{{ user.getId() }}"
-                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Add to Black List</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-
-                                        <form method="post" action="#">
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Email</label>
-                                                    <input name="email" type="email" class="form-control" id="exampleInputPassword1" value="{{ user.getEmail() }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Cause</label>
-                                                    <textarea name="cause" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Close
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End modal-->
 
                             <!--Delete confirmation modal-->
                             <div class="modal fade" id="delete-{{ user.getId() }}"
@@ -142,21 +102,23 @@
                                                     aria-label="Inchide"></button>
                                         </div>
                                         <!--role change form-->
-                                        <form method="post" action="#">
+                                        <form method="get" action="{{ path('change_user_role') }}">
                                             <div class="modal-body">
                                                 <input type="hidden" id="idUser" name="idUser" value="{{ user.getId() }}">
 
                                                 <div class="form-group mb-2">
                                                     <label for="reservationStatus">Change User Role</label>
-{#                                                    <select name="userRole" class="form-select" id="userRole">#}
-{#                                                        {% for role in roles %}#}
-{#                                                            {% if role == user.getIdRole() %}#}
-{#                                                                <option value="{{ role.getIdRole() }}" selected>{{ role.getName() }}</option>#}
-{#                                                            {% else %}#}
-{#                                                                <option value="{{ role.getIdRole() }}">{{ role.getName() }}</option>#}
-{#                                                            {% endif %}#}
-{#                                                        {% endfor %}#}
-{#                                                    </select>#}
+                                                    <select name="userRole" class="form-select" id="userRole">
+                                                        {% for role in roles %}
+                                                            {% for userRole in user.getRoles() %}
+                                                                {% if role == userRole %}
+                                                                    <option value="{{ role }}" >{{ role }}</option>
+                                                                {% else %}
+                                                                    <option value="{{ role }}"selected>{{ role }}</option>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

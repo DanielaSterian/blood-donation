@@ -3,53 +3,109 @@
 {% block title %}Caz{% endblock %}
 
 {% block body %}
-
     <br>
-    <div class="page-content page-container" id="page-content">
-        {% if(requester != null) %}
-            <div class="padding">
-                <div class="row container d-flex justify-content-center">
-                    <div class="col-xl-6 col-md-12">
-                        <div class="card user-card-full">
-                            <div class="row m-l-0 m-r-0">
-                                <div class="col-sm-4 bg-c-lite-green user-profile">
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="card-block">
-                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informatii</h6>
-                                        <div class="col">
-                                            <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Nume</b></p>
-                                                <h6 class="text-muted f-w-400">{{ requester.firstName }}</h6>
-                                            </div>
-                                            <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Prenume</b></p>
-                                                <h6 class="text-muted f-w-400">{{ requester.lastName }}</h6>
-                                            </div>
-                                            <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Email</b></p>
-                                                <h6 class="text-muted f-w-400">{{ requester.description }}</h6>
-                                            </div>
-                                            <div class="row-sm-6">
-                                                <p class="m-b-10 f-w-600"><b>Grupa de sange</b></p>
-                                                <h6 class="text-muted f-w-400">{{ bloodGroup.name }}</h6>
-                                            </div>
-                                            <div class="row-sm-6">
-                                                <a class="btn btn-danger btn-sm" name="update-user" href="{{ path('app_requester_edit', {'id': requester.id}) }}">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i> Editeaza cazul
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="container-fluid">
+        <div class="card mb-3 mx-auto" style="max-width: 70rem; border: white">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img class="img-fluid img-thumbnail" src="{{ asset('uploads/' ~ requester.image) }}"
+                         alt="...">
+                </div>
+                <div class="col-md-8">
+                    <h5 class="card-title" style="background-color: black; color: #ffffff">Informatii</h5>
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <span style="text-indent: 5em">{{ requester.firstName }}</span>
+                            <span>{{ requester.lastName }}</span>
+                        </h3>
+                        <br>
+
+{#                        <h5 class="card-title" style="background-color: black; color: #ffffff">Informatii</h5>#}
+                        <div class="container-fluid mx-auto">
+                            <div class="row">
+                                <div>
+                                    <i class="fa fa-plus"></i>
+                                    <span>{{ requester.getBloodGroup().name }}</span> <br><br>
+                                <h5 class="card-title"> <span style="font-weight: bold">Descriere:</span>
+                                        <span style=" color: indianred">{{ requester.description }}</span>
+                                </h5>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <a type="button" class="btn btn-outline-secondary" href="{{ path('app_requester_index') }}">Inapoi</a>
+                            </div>
+                            <div class="col" style="text-align: end">
+                                <a href="{{ path('app_donation_new', {'id': requester.id}) }}"
+                                   type="button" class="btn btn-danger btn-block">
+                                    Doneaza
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
     </div>
-    <br>
+    <br><br>
+
+
+
+
+
+
+
+{#    <br>#}
+{#    <div class="page-content page-container" id="page-content">#}
+{#        {% if(requester != null) %}#}
+{#            <div class="padding">#}
+{#                <div class="row container d-flex justify-content-center">#}
+{#                    <div class="col-xl-6 col-md-12">#}
+{#                        <div class="card user-card-full">#}
+{#                            <div class="row m-l-0 m-r-0">#}
+{#                                <div class="col-sm-4 bg-c-lite-green user-profile">#}
+{#                                </div>#}
+{#                                <div class="col-sm-8">#}
+{#                                    <div class="card-block">#}
+{#                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informatii</h6>#}
+{#                                        <div class="col">#}
+{#                                            <div class="row-sm-6">#}
+{#                                                <p class="m-b-10 f-w-600"><b>Nume</b></p>#}
+{#                                                <h6 class="text-muted f-w-400">{{ requester.firstName }}</h6>#}
+{#                                            </div>#}
+{#                                            <div class="row-sm-6">#}
+{#                                                <p class="m-b-10 f-w-600"><b>Prenume</b></p>#}
+{#                                                <h6 class="text-muted f-w-400">{{ requester.lastName }}</h6>#}
+{#                                            </div>#}
+{#                                            <div class="row-sm-6">#}
+{#                                                <p class="m-b-10 f-w-600"><b>Email</b></p>#}
+{#                                                <h6 class="text-muted f-w-400">{{ requester.description }}</h6>#}
+{#                                            </div>#}
+{#                                            <div class="row-sm-6">#}
+{#                                                <p class="m-b-10 f-w-600"><b>Grupa de sange</b></p>#}
+{#                                                <h6 class="text-muted f-w-400">{{ bloodGroup.name }}</h6>#}
+{#                                            </div>#}
+{#                                            <div class="row-sm-6">#}
+{#                                                <a class="btn btn-danger btn-sm" name="update-user" href="{{ path('app_requester_edit', {'id': requester.id}) }}">#}
+{#                                                    <i class="fa fa-edit" aria-hidden="true"></i> Editeaza cazul#}
+{#                                                </a>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#    <br>#}
+
+
+{#---------------------------------------------------#}
+
 
     {#    <h1>Requester</h1>#}
 

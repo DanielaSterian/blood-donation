@@ -12,19 +12,25 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/user")
  */
 class UserController extends AbstractController
 {
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+    public const ROLE_USER = 'ROLE_USER';
+
     /**
      * @Route("/", name="app_user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
+        $roles = [self::ROLE_ADMIN, self::ROLE_USER];
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'roles' => $roles,
         ]);
     }
 
@@ -100,5 +106,51 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/changeRole", name="change_user_role", methods={"GET"})
+     * @param Request $request
+     * @return Response
+     */
+    public function changeRole(Request $request): Response
+    {
+
+        $role = $request->query->get('userRole');
+        var_dump('request: ', $role);
+        $idUser = $request->query->get('idUser');
+
+        if($this->changeUserRole($idUser, $role))
+        {
+            $this->addFlash('success', 'Role successfully changed');
+        }
+        else
+        {
+            $this->addFlash('fail', 'User does not exist');
+        }
+
+        return $this->redirect($this->generateUrl('app_user_index'));
+    }
+
+    /**
+     * change the role of an existing user
+     * @param int $idUser
+     * @param int $idRole
+     * @return bool
+     */
+    public function changeUserRole(int $idUser, $role): bool
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id'=>$idUser]);
+
+        if($user != null)
+        {
+            $role = $role == self::ROLE_ADMIN ? self::ROLE_ADMIN : self::ROLE_USER;
+            $user->setRoles([$role]);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return true;
+        }
+        return false;
     }
 }
