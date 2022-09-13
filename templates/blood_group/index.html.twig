@@ -4,27 +4,13 @@
 
 {% block body %}
 
-    <style>
-        .social-link {
-            width: 30px;
-            height: 30px;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            border-radius: 50%;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('home') }}
+    {% endblock %}
 
-        .social-link:hover,
-        .social-link:focus {
-            background: #ddd;
-            text-decoration: none;
-            color: #555;
-        }
-    </style>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('home') }}
+    {% endblock %}
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -49,7 +35,7 @@
                         Crucea Rosie furnizeaza donatorilor aproximativ 40% din sangele si componentele celulelor sanguine natiunii.
                         Donatiile noastre de sange sunt folosite pentru pacientii care au nevoie de interventii chirurgicale, tratament pentru cancer si transfuzii pentru pierderea de sange din cauza leziunilor traumatice.</p>
                 </div>
-                <div class="col-lg-6 d-none d-lg-block"><img src="{{ asset('/images/benefitsOfBloodDonation.png') }}" alt="" class="img-fluid"></div>
+                <div class="col-lg-6 d-none d-lg-block"><img src="{{asset("/images/blood drops.jpg") }}" alt="" class="img-fluid mb-4 mb-lg-0"></div>
             </div>
         </div>
     </div>
@@ -70,20 +56,24 @@
                         <li>In timp ce <b>38%</b> din populatia Americii este capabila sa doneze sange, doar <b>2% doneaza de fapt</b>.</li>
                     </ul>
                 </div>
-                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="{{ asset('/images/did you know.jpg') }}" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="{{asset("/images/blood drops.jpg") }}" alt="" class="img-fluid mb-4 mb-lg-0"></div>
             </div>
-{#            <div class="row align-items-center">#}
-{#                <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>#}
-{#                <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>#}
-{#                    <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>#}
-{#                    <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>#}
-{#                </div>#}
-{#            </div>#}
+
+
+            <div class="row align-items-center">
+                <div class="col-lg-5 px-5 mx-auto"><img src="{{asset("/images/blood drops.jpg") }}" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                <div class="col-lg-6">
+                    <h2 class="font-weight-light" style="color:#B0413E">Compatibilitatea dintre grupele de sange</h2> <br>
+                    <ul>
+                        <li>Grupa de sange <b>0</b> poate dona pentru <b>toate</b> grupele: <b>0, A, B, AB</b></li>
+                        <li>Grupa de sange <b>A</b> poate dona pentru grupele: <b>A, AB</b></li>
+                        <li>Grupa de sange <b>B</b> poate dona pentru grupele: <b>B, AB</b></li>
+                        <li>Grupa de sange <b>AB</b> poate dona pentru grupele: <b>AB</b></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    {#            blood groups#}
 
     <div class="bg-light py-5">
         <div class="container py-5">
@@ -102,7 +92,6 @@
                         <span class="small text-uppercase text-muted">{{ blood_group.description }}</span>
                         <ul class="social mb-0 list-inline mt-3">
                             <li class="list-inline-item"><a href="{{ path('app_blood_group_edit', {'id': blood_group.id}) }}" class="social-link"><i class="fa fa-edit"></i></a></li>
-{#                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-trash"></i></a></li>#}
                             <li class="list-inline-item">{{ include('blood_group/_delete_form.html.twig') }}</li>
                         </ul>
                     </div>
