@@ -87,8 +87,8 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user, true);
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Profilul a fost actualizat cu succes!');
+            return $this->redirectToRoute('app_user_edit', ['id' => $user->getId()]);
         }
 
         return $this->renderForm('user/edit.html.twig', [

@@ -4,6 +4,17 @@
 
 {% block body %}
     <br>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('fail') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="page-content page-container" id="page-content">
         {{ form_start(form) }}
         <div class="padding">
