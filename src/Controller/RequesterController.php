@@ -7,6 +7,7 @@ use App\Entity\Requester;
 use App\Entity\User;
 use App\Form\RequesterType;
 use App\Repository\RequesterRepository;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -71,7 +72,7 @@ class RequesterController extends AbstractController
             }
             $requester->setUser($this->getUser());
             $requesterRepository->add($requester, true);
-
+            $this->addFlash('success', 'Cazul tau a fost postat!');
             return $this->redirectToRoute('app_requester_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -109,8 +110,33 @@ class RequesterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $requesterRepository->add($requester, true);
+            $image = $form->get('image')->getData();
+            if(!empty($image))
+            {
+                $filesystem = new Filesystem();
+                if($requester->getImage())
+                {
+                    $filesystem->remove($this->getParameter('images_directory') . '/' . $requester->getImage());
+                }
 
+                $imageName = md5(uniqid()).'.'.$image->guessExtension();
+                try
+                {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $imageName
+                    );
+                }
+                catch (FileException $e)
+                {
+                    $this->addFlash('danger', 'Could not upload the image.');
+                    $this->redirectToRoute('app_requester_new');
+                }
+
+                $requester->setImage($imageName);
+            }
+            $requesterRepository->add($requester, true);
+            $this->addFlash('success', 'Donatia a fost actualizata cu succes!');
             return $this->redirectToRoute('app_requester_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -126,7 +152,13 @@ class RequesterController extends AbstractController
     public function delete(Request $request, Requester $requester, RequesterRepository $requesterRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$requester->getId(), $request->request->get('_token'))) {
-            $requesterRepository->remove($requester, true);
+            try{
+                $requesterRepository->remove($requester, true);
+                $this->addFlash('success', 'Cazul a fost stears cu succes!');
+            }catch(ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('fail', 'Nu poti sterge acest caz');
+            }
+
         }
 
         return $this->redirectToRoute('app_requester_index', [], Response::HTTP_SEE_OTHER);

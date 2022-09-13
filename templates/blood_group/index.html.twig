@@ -26,6 +26,18 @@
         }
     </style>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('fail') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="bg-light">
         <div class="container py-5">
             <div class="row h-100 align-items-center py-5">
@@ -101,36 +113,4 @@
             </div>
         </div>
     </div>
-
-{#    <h1>BloodGroup index</h1>#}
-
-{#    <table class="table">#}
-{#        <thead>#}
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <th>Name</th>#}
-{#                <th>Description</th>#}
-{#                <th>actions</th>#}
-{#            </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for blood_group in blood_groups %}#}
-{#            <tr>#}
-{#                <td>{{ blood_group.id }}</td>#}
-{#                <td>{{ blood_group.name }}</td>#}
-{#                <td>{{ blood_group.description }}</td>#}
-{#                <td>#}
-{#                    <a href="{{ path('app_blood_group_show', {'id': blood_group.id}) }}">show</a>#}
-{#                    <a href="{{ path('app_blood_group_edit', {'id': blood_group.id}) }}">edit</a>#}
-{#                </td>#}
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td colspan="4">no records found</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
-
-{#    <a href="{{ path('app_blood_group_new') }}">Create new</a>#}
 {% endblock %}

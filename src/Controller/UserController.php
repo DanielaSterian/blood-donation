@@ -6,6 +6,7 @@ use App\Entity\BloodGroup;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -102,7 +103,13 @@ class UserController extends AbstractController
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $userRepository->remove($user, true);
+            try{
+                $userRepository->remove($user, true);
+                $this->addFlash('success', 'Utilizatorul a fost stears cu succes!');
+            }catch(ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('fail', 'Nu poti sterge acest utilizator');
+            }
+
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);

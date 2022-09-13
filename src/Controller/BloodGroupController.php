@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\BloodGroup;
 use App\Form\BloodGroupType;
 use App\Repository\BloodGroupRepository;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,7 @@ class BloodGroupController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bloodGroupRepository->add($bloodGroup, true);
-
+            $this->addFlash('success', 'Grupa de sange a fost adaugata cu succes!');
             return $this->redirectToRoute('app_blood_group_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -66,7 +67,7 @@ class BloodGroupController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bloodGroupRepository->add($bloodGroup, true);
-
+            $this->addFlash('success', 'Grupa de sange a fost actualizata cu succes!');
             return $this->redirectToRoute('app_blood_group_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,9 +83,13 @@ class BloodGroupController extends AbstractController
     public function delete(Request $request, BloodGroup $bloodGroup, BloodGroupRepository $bloodGroupRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$bloodGroup->getId(), $request->request->get('_token'))) {
-            $bloodGroupRepository->remove($bloodGroup, true);
+            try{
+                $bloodGroupRepository->remove($bloodGroup, true);
+                $this->addFlash('success', 'Grupa de sange a fost stearsa cu succes!');
+            }catch(ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('fail', 'Nu poti sterge aceasta grupa de sange  ');
+            }
         }
-
         return $this->redirectToRoute('app_blood_group_index', [], Response::HTTP_SEE_OTHER);
     }
 }

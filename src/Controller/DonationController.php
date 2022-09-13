@@ -53,7 +53,7 @@ class DonationController extends AbstractController
             $donation->setUser($this->getUser());
             $donation->setRequester($requester);
             $donationRepository->add($donation, true);
-
+            $this->addFlash('success', 'Donatia ta a fost inregistrata');
             return $this->redirectToRoute('app_donation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -100,8 +100,8 @@ class DonationController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$donation->getId(), $request->request->get('_token'))) {
             $donationRepository->remove($donation, true);
+            $this->addFlash('success', 'Donatia a fost stearsa cu succes!');
         }
-
         return $this->redirectToRoute('app_donation_index', [], Response::HTTP_SEE_OTHER);
     }
 }
