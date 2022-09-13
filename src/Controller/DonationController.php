@@ -21,9 +21,18 @@ class DonationController extends AbstractController
      */
     public function index(DonationRepository $donationRepository): Response
     {
+        $user = $this->getUser();;
+
+        if(in_array(UserController::ROLE_ADMIN, $this->getUser()->getRoles(), true)) {
+            $donations = $donationRepository->findAll();
+        } elseif(in_array(UserController::ROLE_USER, $this->getUser()->getRoles(), true)) {
+            $donations = $donationRepository->findBy(['user' => $user->getId()]);
+        } else {
+            $donations = [];
+        }
 
         return $this->render('donation/index.html.twig', [
-            'donations' => $donationRepository->findAll(),
+            'donations' => $donations,
         ]);
     }
 
