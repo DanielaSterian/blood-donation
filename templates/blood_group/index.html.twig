@@ -102,14 +102,12 @@
                         <span class="small text-uppercase text-muted">{{ blood_group.description }}</span>
                         <ul class="social mb-0 list-inline mt-3">
                             <li class="list-inline-item"><a href="{{ path('app_blood_group_edit', {'id': blood_group.id}) }}" class="social-link"><i class="fa fa-edit"></i></a></li>
-                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-trash"></i></a></li>
-                            <li>{{ include('blood_group/_delete_form.html.twig') }}</li>
+{#                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-trash"></i></a></li>#}
+                            <li class="list-inline-item">{{ include('blood_group/_delete_form.html.twig') }}</li>
                         </ul>
-
                     </div>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
     </div>
