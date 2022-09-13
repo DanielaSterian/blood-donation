@@ -30,8 +30,9 @@ class RequesterType extends AbstractType
             ->add('bloodGroup', EntityType::class, [
                 'class' => 'App\Entity\BloodGroup',
                 'choice_label'=>'name'
-            ])
-        ;
+            ]);
+            $builder->get('image')->setRequired(false);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

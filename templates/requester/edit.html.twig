@@ -3,10 +3,6 @@
 {% block title %}Edit Requester{% endblock %}
 
 {% block body %}
-
-    <div class="banner"></div>
-    <br>
-
     <div class="container-fluid">
         <div class="card mx-auto" style="max-width: 40rem;">
             <div class="card-header" style="text-align: center;background-color: white; font-weight: bold; font-size: 18px">
@@ -34,8 +30,6 @@
         </div>
     </div>
 
-    </div>
-
     <div class="card-footer">
         <div class="row">
             <div class="col-6" style="text-align: start">
@@ -47,14 +41,5 @@
         </div>
     </div>
     {{ form_end(form) }}
-    </div>
-    </div>
     <br>
-
-
-{#    {{ include('requester/_form.html.twig', {'button_label': 'Update'}) }}#}
-
-{#    <a href="{{ path('app_requester_index') }}">back to list</a>#}
-
-{#    {{ include('requester/_delete_form.html.twig') }}#}
 {% endblock %}

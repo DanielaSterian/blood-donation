@@ -106,6 +106,7 @@ class RequesterController extends AbstractController
      */
     public function edit(Request $request, Requester $requester, RequesterRepository $requesterRepository): Response
     {
+        $initialImage = $requester->getImage();
         $form = $this->createForm(RequesterType::class, $requester);
         $form->handleRequest($request);
 
@@ -134,7 +135,10 @@ class RequesterController extends AbstractController
                 }
 
                 $requester->setImage($imageName);
+            }elseif(empty($image)) {
+                $requester->setImage($initialImage);
             }
+
             $requesterRepository->add($requester, true);
             $this->addFlash('success', 'Donatia a fost actualizata cu succes!');
             return $this->redirectToRoute('app_requester_index', [], Response::HTTP_SEE_OTHER);
